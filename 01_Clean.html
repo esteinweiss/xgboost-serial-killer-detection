@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Part 1: Data Cleaning – Cold Trail</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-940627874eaccf62d3c84b3558590d2a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-3cd3af1e92d13984b99adbd03b402d65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Clean.html">Part 1: Data Cleaning</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cold Trail</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cold Trail: Tracking Hidden Serial Killers and the Counties That Fall Short</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Clean.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Part 1: Data Cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 2: Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Clusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 3: Serial Killer Clusters</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Validate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 4: Validation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_ReportCard.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 5: County Comparison</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link active" data-scroll-target="#load-the-data">Load the data</a></li>
+  <li><a href="#look-at-the-columns" id="toc-look-at-the-columns" class="nav-link" data-scroll-target="#look-at-the-columns">Look at the columns</a></li>
+  <li><a href="#create-the-baseline" id="toc-create-the-baseline" class="nav-link" data-scroll-target="#create-the-baseline">Create the baseline</a></li>
+  <li><a href="#exploratory-visualizations" id="toc-exploratory-visualizations" class="nav-link" data-scroll-target="#exploratory-visualizations">Exploratory Visualizations</a></li>
+  <li><a href="#save-clean-data" id="toc-save-clean-data" class="nav-link" data-scroll-target="#save-clean-data">Save Clean Data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Part 1: Data Cleaning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="7f5a964b" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="load-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-data">Load the data</h2>
+<p>The Murder Accountability Project built this file from the FBI’s homicide reports. It covers 929,433 U.S. homicides from 1976 to 2025. Each record includes the county, the victim’s details, the weapon, and whether the case was solved.</p>
+<div id="3921df02" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"reports.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">CNTYFIPS</th>
+<th data-quarto-table-cell-role="th">Ori</th>
+<th data-quarto-table-cell-role="th">State</th>
+<th data-quarto-table-cell-role="th">Agency</th>
+<th data-quarto-table-cell-role="th">Agentype</th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">Solved</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">OffEthnic</th>
+<th data-quarto-table-cell-role="th">Weapon</th>
+<th data-quarto-table-cell-role="th">Relationship</th>
+<th data-quarto-table-cell-role="th">Circumstance</th>
+<th data-quarto-table-cell-role="th">Subcircum</th>
+<th data-quarto-table-cell-role="th">VicCount</th>
+<th data-quarto-table-cell-role="th">OffCount</th>
+<th data-quarto-table-cell-role="th">FileDate</th>
+<th data-quarto-table-cell-role="th">MSA</th>
+<th data-quarto-table-cell-role="th">filter_$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>197609001AL00400</td>
+<td>Autauga, AL</td>
+<td>AL00400</td>
+<td>Alabama</td>
+<td>Autauga County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>No</td>
+<td>1976</td>
+<td>September</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>Relationship not determined</td>
+<td>Other</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>30180.0</td>
+<td>Montgomery, AL</td>
+<td>Not Selected</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>197701001AL00400</td>
+<td>Autauga, AL</td>
+<td>AL00400</td>
+<td>Alabama</td>
+<td>Autauga County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1977</td>
+<td>January</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>Acquaintance</td>
+<td>Brawl due to influence of alcohol</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>30180.0</td>
+<td>Montgomery, AL</td>
+<td>Not Selected</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>197703001AL00400</td>
+<td>Autauga, AL</td>
+<td>AL00400</td>
+<td>Alabama</td>
+<td>Autauga County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1977</td>
+<td>March</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>Acquaintance</td>
+<td>Other arguments</td>
+<td>NaN</td>
+<td>0</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Montgomery, AL</td>
+<td>Not Selected</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>197703001AL00401</td>
+<td>Autauga, AL</td>
+<td>AL00401</td>
+<td>Alabama</td>
+<td>Prattville</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1977</td>
+<td>March</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Shotgun</td>
+<td>Husband</td>
+<td>Other arguments</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>30180.0</td>
+<td>Montgomery, AL</td>
+<td>Not Selected</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>197708001AL00400</td>
+<td>Autauga, AL</td>
+<td>AL00400</td>
+<td>Alabama</td>
+<td>Autauga County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1977</td>
+<td>August</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>Acquaintance</td>
+<td>Circumstances undetermined</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>30180.0</td>
+<td>Montgomery, AL</td>
+<td>Not Selected</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">929428</th>
+<td>198701001WY02300</td>
+<td>Weston, WY</td>
+<td>WY02300</td>
+<td>Wyoming</td>
+<td>Weston County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1987</td>
+<td>January</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Asphyxiation - includes death by gas</td>
+<td>Son</td>
+<td>All other manslaughter by negligence</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>61987.0</td>
+<td>Rural Wyoming</td>
+<td>Not Selected</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">929429</th>
+<td>199412001WY02300</td>
+<td>Weston, WY</td>
+<td>WY02300</td>
+<td>Wyoming</td>
+<td>Weston County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1994</td>
+<td>December</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>Acquaintance</td>
+<td>All other manslaughter by negligence</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>22795.0</td>
+<td>Rural Wyoming</td>
+<td>Not Selected</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">929430</th>
+<td>200405001WY02300</td>
+<td>Weston, WY</td>
+<td>WY02300</td>
+<td>Wyoming</td>
+<td>Weston County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>2004</td>
+<td>May</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>Girlfriend</td>
+<td>Other arguments</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>90704.0</td>
+<td>Rural Wyoming</td>
+<td>Not Selected</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">929431</th>
+<td>201106001WY02301</td>
+<td>Weston, WY</td>
+<td>WY02301</td>
+<td>Wyoming</td>
+<td>Newcastle</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>No</td>
+<td>2011</td>
+<td>June</td>
+<td>...</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>Relationship not determined</td>
+<td>Circumstances undetermined</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>81711.0</td>
+<td>Rural Wyoming</td>
+<td>Not Selected</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">929432</th>
+<td>202107001WY02300</td>
+<td>Weston, WY</td>
+<td>WY02300</td>
+<td>Wyoming</td>
+<td>Weston County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>2021</td>
+<td>July</td>
+<td>...</td>
+<td>Not of Hispanic origin</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>Neighbor</td>
+<td>Other arguments</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>50321.0</td>
+<td>Rural Wyoming</td>
+<td>Not Selected</td>
+</tr>
+</tbody>
+</table>
+
+<p>929433 rows × 31 columns</p>
+</div>
+</div>
+</div>
+<div id="b40b43d5" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>(929433, 31)</code></pre>
+</div>
+</div>
+</section>
+<section id="look-at-the-columns" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-the-columns">Look at the columns</h2>
+<p>Before choosing features, I had to sort out which columns are known when a murder happens and which are only filled in after it’s solved.</p>
+<div id="47f6d40c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>Index(['ID', 'CNTYFIPS', 'Ori', 'State', 'Agency', 'Agentype', 'Source',
+       'Solved', 'Year', 'Month', 'Incident', 'ActionType', 'Homicide',
+       'Situation', 'VicAge', 'VicSex', 'VicRace', 'VicEthnic', 'OffAge',
+       'OffSex', 'OffRace', 'OffEthnic', 'Weapon', 'Relationship',
+       'Circumstance', 'Subcircum', 'VicCount', 'OffCount', 'FileDate', 'MSA',
+       'filter_$'],
+      dtype='str')</code></pre>
+</div>
+</div>
+<p>Offender details, relationship, and circumstance are only known after a case is solved. If I kept them, the model would “predict” solved cases by seeing who did it.</p>
+<div id="231eb59c" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'OffAge'</span>,  <span class="st">'OffSex'</span>, <span class="st">'OffRace'</span>, <span class="st">'OffEthnic'</span>, <span class="st">'filter_$'</span>,<span class="st">'Situation'</span>, <span class="st">'Relationship'</span>, <span class="st">'Circumstance'</span>, <span class="st">'Subcircum'</span>, <span class="st">'OffCount'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="9c29429e" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 929433 entries, 0 to 929432
+Data columns (total 21 columns):
+ #   Column      Non-Null Count   Dtype  
+---  ------      --------------   -----  
+ 0   ID          929433 non-null  str    
+ 1   CNTYFIPS    929433 non-null  str    
+ 2   Ori         929433 non-null  str    
+ 3   State       929433 non-null  str    
+ 4   Agency      929433 non-null  str    
+ 5   Agentype    929433 non-null  str    
+ 6   Source      929433 non-null  str    
+ 7   Solved      929433 non-null  str    
+ 8   Year        929433 non-null  int64  
+ 9   Month       929433 non-null  str    
+ 10  Incident    929433 non-null  int64  
+ 11  ActionType  929433 non-null  str    
+ 12  Homicide    929433 non-null  str    
+ 13  VicAge      929433 non-null  int64  
+ 14  VicSex      929433 non-null  str    
+ 15  VicRace     929433 non-null  str    
+ 16  VicEthnic   929433 non-null  str    
+ 17  Weapon      929433 non-null  str    
+ 18  VicCount    929433 non-null  int64  
+ 19  FileDate    904562 non-null  float64
+ 20  MSA         929433 non-null  str    
+dtypes: float64(1), int64(4), str(16)
+memory usage: 148.9 MB</code></pre>
+</div>
+</div>
+<div id="6e317c11" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df[col].value_counts().head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ID
+197702001NY05904    13
+201405001CA04200    12
+199204001FL05003    12
+199310004CA01942    11
+202301001CA01948    11
+201512004CA03610    11
+201811001CA05607    11
+199504006OK05506    11
+199504007OK05506    11
+199504008OK05506    11
+Name: count, dtype: int64
+CNTYFIPS
+Los Angeles, CA       56892
+New York, NY          48463
+Cook, IL              33372
+Wayne, MI             25339
+Harris, TX            24077
+Philadelphia, PA      18455
+Dallas, TX            15471
+Baltimore city, MD    13419
+Miami-Dade, FL        12575
+Maricopa, AZ          12408
+Name: count, dtype: int64
+Ori
+NY03030    48446
+ILCPD00    31316
+CA01942    29789
+MI82349    22663
+TXHPD00    18724
+PAPEP00    18436
+MDBPD00    13293
+TXDPD00    12847
+LANPD00     9928
+DCMPD00     9867
+Name: count, dtype: int64
+State
+California        133305
+Texas              89997
+New York           63761
+Florida            52019
+Illinois           40626
+Michigan           39834
+Pennsylvania       35676
+Georgia            31102
+North Carolina     31074
+Ohio               29393
+Name: count, dtype: int64
+Agency
+New York        48446
+Chicago         31316
+Los Angeles     29789
+Detroit         22663
+Houston         18728
+Philadelphia    18450
+Baltimore       13293
+Dallas          12898
+Washington      10029
+New Orleans      9928
+Name: count, dtype: int64
+Agentype
+Municipal police      718087
+Sheriff               156996
+County police          26957
+Primary state LE       23796
+Special police          2029
+Tribal                   776
+Regional police          401
+Primary federal LE       391
+Name: count, dtype: int64
+Source
+FBI    890515
+MAP     38918
+Name: count, dtype: int64
+Solved
+Yes    657639
+No     271794
+Name: count, dtype: int64
+Year
+1993    24337
+1992    23793
+2021    23699
+1994    23246
+1980    23092
+2020    22700
+1991    22657
+2022    21740
+1979    21698
+1990    21246
+Name: count, dtype: int64
+Month
+July         85708
+August       83650
+December     79102
+June         78894
+September    78760
+May          78686
+October      78437
+January      76746
+March        74521
+April        74429
+Name: count, dtype: int64
+Incident
+1     380382
+2     100315
+3      55467
+4      38516
+5      29442
+6      23605
+7      19528
+8      16573
+9      14260
+10     12510
+Name: count, dtype: int64
+ActionType
+Normal update    778715
+Adjustment       150718
+Name: count, dtype: int64
+Homicide
+Murder and non-negligent manslaughter    905648
+Manslaughter by negligence                23785
+Name: count, dtype: int64
+VicAge
+22    32095
+25    32006
+21    31862
+20    31683
+23    31548
+24    30761
+19    30719
+26    29116
+27    27957
+30    27169
+Name: count, dtype: int64
+VicSex
+Male       719732
+Female     207852
+Unknown      1849
+Name: count, dtype: int64
+VicRace
+White                                  452052
+Black                                  443702
+Asian                                   13362
+Unknown                                 12009
+American Indian or Alaskan Native        7950
+Native Hawaiian or Pacific Islander       358
+Name: count, dtype: int64
+VicEthnic
+Unknown or not reported    510962
+Not of Hispanic origin     315178
+Hispanic origin            103293
+Name: count, dtype: int64
+Weapon
+Handgun - pistol, revolver, etc       442140
+Knife or cutting instrument           128046
+Firearm, type not stated              101533
+Other or type unknown                  56213
+Personal weapons, includes beating     50902
+Shotgun                                40226
+Blunt object - hammer, club, etc       37841
+Rifle                                  33343
+Strangulation - hanging                10165
+Fire                                    8388
+Name: count, dtype: int64
+VicCount
+0     846875
+1      60246
+2      13187
+3       4720
+4       1778
+5        830
+9        480
+6        456
+7        296
+10       275
+Name: count, dtype: int64
+FileDate
+30180.0    77684
+81723.0    28523
+92324.0    20458
+93019.0    15563
+43020.0    15505
+81525.0     9983
+70618.0     6701
+30101.0     6375
+11818.0     4714
+11017.0     4412
+Name: count, dtype: int64
+MSA
+New York-New Jersey-Long Island, NY-NJ          66232
+Los Angeles-Long Beach, CA                      61770
+Chicago-Naperville-Joliet, IL-IN-WI             39690
+Detroit-Warren-Livonia, MI                      28237
+Houston-Sugar Land-Baytown, TX                  27928
+Philadelphia-Camden-Wilmington, PA-NJ-DE        26137
+Dallas-Fort Worth-Arlington, TX                 24064
+Miami-Fort Lauderdale, FL                       20467
+Washington-Arlington-Alexandria, DC-VA-MD-WV    19513
+Atlanta-Sandy Springs-Marietta, GA              17983
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>I counted how many values in each column are “Unknown.”</p>
+<div id="2998e95f" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(df <span class="op">==</span> <span class="st">"Unknown"</span>).<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>ID                0
+CNTYFIPS          0
+Ori               0
+State             0
+Agency            1
+Agentype          0
+Source            0
+Solved            0
+Year              0
+Month             0
+Incident          0
+ActionType        0
+Homicide          0
+VicAge            0
+VicSex         1849
+VicRace       12009
+VicEthnic         0
+Weapon            0
+VicCount          0
+FileDate          0
+MSA               0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>I didn’t drop unknown race or sex, since the missing information itself might affect whether a case gets solved.</p>
+</section>
+<section id="create-the-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-baseline">Create the baseline</h2>
+<p>The question is whether a murder gets solved, so this is my outcome.</p>
+<div id="adacc030" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Solved'</span>].value_counts()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'solved'</span>] <span class="op">=</span> (df[<span class="st">'Solved'</span>]<span class="op">==</span><span class="st">'Yes'</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'solved'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>solved
+1    657639
+0    271794
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>About 71% of murders are solved.</p>
+<p>I checked the highest victim ages.</p>
+<div id="26cd6a4a" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'VicAge'</span>].value_counts().sort_index().tail()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>VicAge
+96        67
+97        69
+98        43
+99       180
+999    13577
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>999 is a code for “unknown,” not a real age. Left in, it would look like a 999-year-old victim and throw off the model.</p>
+<div id="0a8f8891" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'VicAge'</span>] <span class="op">=</span> df[<span class="st">'VicAge'</span>].replace([<span class="dv">998</span>, <span class="dv">999</span>], np.nan)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>I checked whether any incident ID shows up more than once.</p>
+<div id="5158cb32" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'ID'</span>].duplicated(keep<span class="op">=</span><span class="va">False</span>)].sort_values(<span class="st">'ID'</span>).head(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">CNTYFIPS</th>
+<th data-quarto-table-cell-role="th">Ori</th>
+<th data-quarto-table-cell-role="th">State</th>
+<th data-quarto-table-cell-role="th">Agency</th>
+<th data-quarto-table-cell-role="th">Agentype</th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">Solved</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Homicide</th>
+<th data-quarto-table-cell-role="th">VicAge</th>
+<th data-quarto-table-cell-role="th">VicSex</th>
+<th data-quarto-table-cell-role="th">VicRace</th>
+<th data-quarto-table-cell-role="th">VicEthnic</th>
+<th data-quarto-table-cell-role="th">Weapon</th>
+<th data-quarto-table-cell-role="th">VicCount</th>
+<th data-quarto-table-cell-role="th">FileDate</th>
+<th data-quarto-table-cell-role="th">MSA</th>
+<th data-quarto-table-cell-role="th">solved</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">72375</th>
+<td>197601001CA01933</td>
+<td>Los Angeles, CA</td>
+<td>CA01933</td>
+<td>California</td>
+<td>Inglewood</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>No</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>16.0</td>
+<td>Male</td>
+<td>Black</td>
+<td>Unknown or not reported</td>
+<td>Firearm, type not stated</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Los Angeles-Long Beach, CA</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">72376</th>
+<td>197601001CA01933</td>
+<td>Los Angeles, CA</td>
+<td>CA01933</td>
+<td>California</td>
+<td>Inglewood</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>No</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>25.0</td>
+<td>Male</td>
+<td>Black</td>
+<td>Unknown or not reported</td>
+<td>Firearm, type not stated</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Los Angeles-Long Beach, CA</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">72383</th>
+<td>197601001CA01975</td>
+<td>Los Angeles, CA</td>
+<td>CA01975</td>
+<td>California</td>
+<td>West Covina</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>No</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>42.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Los Angeles-Long Beach, CA</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">72384</th>
+<td>197601001CA01975</td>
+<td>Los Angeles, CA</td>
+<td>CA01975</td>
+<td>California</td>
+<td>West Covina</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>No</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>68.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Los Angeles-Long Beach, CA</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">131176</th>
+<td>197601001CA02706</td>
+<td>Monterey, CA</td>
+<td>CA02706</td>
+<td>California</td>
+<td>Monterey</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>42.0</td>
+<td>Female</td>
+<td>Asian</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Salinas, CA</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">131175</th>
+<td>197601001CA02706</td>
+<td>Monterey, CA</td>
+<td>CA02706</td>
+<td>California</td>
+<td>Monterey</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>28.0</td>
+<td>Female</td>
+<td>Asian</td>
+<td>Unknown or not reported</td>
+<td>Other or type unknown</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Salinas, CA</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">204152</th>
+<td>197601001DCMPD00</td>
+<td>District of Columbia</td>
+<td>DCMPD00</td>
+<td>District of Columbia</td>
+<td>Washington</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>28.0</td>
+<td>Male</td>
+<td>Black</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Washington-Arlington-Alexandria, DC-VA-MD-WV</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">204151</th>
+<td>197601001DCMPD00</td>
+<td>District of Columbia</td>
+<td>DCMPD00</td>
+<td>District of Columbia</td>
+<td>Washington</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>22.0</td>
+<td>Male</td>
+<td>Black</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Washington-Arlington-Alexandria, DC-VA-MD-WV</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">215426</th>
+<td>197601001FL00500</td>
+<td>Brevard, FL</td>
+<td>FL00500</td>
+<td>Florida</td>
+<td>Brevard County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>22.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Shotgun</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Palm Bay-Melbourne-Titusville, FL</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">215427</th>
+<td>197601001FL00500</td>
+<td>Brevard, FL</td>
+<td>FL00500</td>
+<td>Florida</td>
+<td>Brevard County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>22.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Shotgun</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Palm Bay-Melbourne-Titusville, FL</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">300302</th>
+<td>197601001ID01402</td>
+<td>Canyon, ID</td>
+<td>ID01402</td>
+<td>Idaho</td>
+<td>Nampa</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>34.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Boise City-Nampa, ID</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">300303</th>
+<td>197601001ID01402</td>
+<td>Canyon, ID</td>
+<td>ID01402</td>
+<td>Idaho</td>
+<td>Nampa</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>37.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Boise City-Nampa, ID</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">301793</th>
+<td>197601001IL01643</td>
+<td>Cook, IL</td>
+<td>IL01643</td>
+<td>Illinois</td>
+<td>Harvey</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>77.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Chicago-Naperville-Joliet, IL-IN-WI</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">301792</th>
+<td>197601001IL01643</td>
+<td>Cook, IL</td>
+<td>IL01643</td>
+<td>Illinois</td>
+<td>Harvey</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>77.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Chicago-Naperville-Joliet, IL-IN-WI</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">335787</th>
+<td>197601001IL04501</td>
+<td>Kane, IL</td>
+<td>IL04501</td>
+<td>Illinois</td>
+<td>Aurora</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>23.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Chicago-Naperville-Joliet, IL-IN-WI</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">335786</th>
+<td>197601001IL04501</td>
+<td>Kane, IL</td>
+<td>IL04501</td>
+<td>Illinois</td>
+<td>Aurora</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>23.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Chicago-Naperville-Joliet, IL-IN-WI</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">357050</th>
+<td>197601001IN06100</td>
+<td>Parke, IN</td>
+<td>IN06100</td>
+<td>Indiana</td>
+<td>Parke County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>26.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Rural Indiana</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">357049</th>
+<td>197601001IN06100</td>
+<td>Parke, IN</td>
+<td>IN06100</td>
+<td>Indiana</td>
+<td>Parke County</td>
+<td>Sheriff</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>4.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Rural Indiana</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">357052</th>
+<td>197601001IN06101</td>
+<td>Parke, IN</td>
+<td>IN06101</td>
+<td>Indiana</td>
+<td>Rockville</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>26.0</td>
+<td>Female</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Rural Indiana</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">357051</th>
+<td>197601001IN06101</td>
+<td>Parke, IN</td>
+<td>IN06101</td>
+<td>Indiana</td>
+<td>Rockville</td>
+<td>Municipal police</td>
+<td>FBI</td>
+<td>Yes</td>
+<td>1976</td>
+<td>January</td>
+<td>...</td>
+<td>Murder and non-negligent manslaughter</td>
+<td>4.0</td>
+<td>Male</td>
+<td>White</td>
+<td>Unknown or not reported</td>
+<td>Knife or cutting instrument</td>
+<td>1</td>
+<td>30180.0</td>
+<td>Rural Indiana</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>20 rows × 22 columns</p>
+</div>
+</div>
+</div>
+<p>One incident can have several victims. Each row is a different person, so I kept them all.</p>
+<p>Accidental deaths aren’t solved or unsolved the way murders are, so they would blur the pattern I’m looking for.</p>
+<div id="25b6995f" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'Homicide'</span>] <span class="op">!=</span> <span class="st">'Manslaughter by negligence'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="700364db" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Homicide'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Homicide
+Murder and non-negligent manslaughter    905648
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-visualizations">Exploratory Visualizations</h2>
+<p>Before modeling, I wanted to see whether solve rates differ by victim race and weapon. If they do, those are worth giving the model.</p>
+<div id="ce55a099" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>top_counties <span class="op">=</span> df[<span class="st">"CNTYFIPS"</span>].value_counts().head(<span class="dv">10</span>).index</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>top_weapons <span class="op">=</span> df[<span class="st">"Weapon"</span>].value_counts().head(<span class="dv">5</span>).index</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>top10c <span class="op">=</span> df[df[<span class="st">"CNTYFIPS"</span>].isin(top_counties)]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>top10w <span class="op">=</span> top10c[top10c[<span class="st">"Weapon"</span>].isin(top_weapons)]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> df.groupby([<span class="st">"Year"</span>, <span class="st">"VicRace"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"solved"</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="1223a543" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plain <span class="op">=</span> theme_bw() <span class="op">+</span> theme(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    panel_grid_major<span class="op">=</span>element_blank(),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    panel_grid_minor<span class="op">=</span>element_blank(),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    panel_border<span class="op">=</span>element_blank(),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    panel_background<span class="op">=</span>element_blank(),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="6991098c" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>(ggplot(by_year, aes(x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"solved"</span>, color<span class="op">=</span><span class="st">'VicRace'</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> geom_line()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> scale_color_brewer(palette<span class="op">=</span><span class="st">"Set1"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> plain</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Murder Solve Rate by Victim Race, 1976–2025"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Share solved"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+<figure class="figure">
+<p><img src="01_Clean_files/figure-html/cell-18-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Murders of Black victims were solved more often than murders of white victims in the late 1970s, but that flipped in the 1980s and the gap kept growing after that. Since both lines move a lot over time, I kept Year as a feature so the model can account for those shifts.</p>
+<div id="71d8f3d5" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(ggplot(top10w, aes(x<span class="op">=</span><span class="st">"CNTYFIPS"</span>, fill<span class="op">=</span><span class="st">"Weapon"</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> geom_bar(position<span class="op">=</span><span class="st">"fill"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> scale_fill_brewer(<span class="bu">type</span><span class="op">=</span><span class="st">"qual"</span>, palette<span class="op">=</span><span class="st">"Set1"</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> coord_flip()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> plain</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a> <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"How Murders Happen: Top 10 Counties"</span>, y<span class="op">=</span><span class="st">"Share of murders"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="01_Clean_files/figure-html/cell-19-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Handguns are the most common weapon in every one of these counties. Miami-Dade and Wayne County (Detroit) have a bigger share of guns coded as “Firearm, type not stated,” which tells me counties don’t all record weapons the same way.</p>
+</section>
+<section id="save-clean-data" class="level2">
+<h2 class="anchored" data-anchor-id="save-clean-data">Save Clean Data</h2>
+<p>I saved the cleaned data so the modeling notebook starts from here instead of repeating every cleaning step.</p>
+<div id="eaa866b8" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'ID'</span>, <span class="st">'CNTYFIPS'</span>, <span class="st">'State'</span>, <span class="st">'Agentype'</span>, <span class="st">'Year'</span>, <span class="st">'Month'</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'VicAge'</span>, <span class="st">'VicSex'</span>, <span class="st">'VicRace'</span>, <span class="st">'VicEthnic'</span>, <span class="st">'Weapon'</span>, <span class="st">'VicCount'</span>, <span class="st">'solved'</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[features]</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"clean.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/esteinweiss\.github\.io\/xgboost-serial-killer-detection\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
