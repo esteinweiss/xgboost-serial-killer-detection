@@ -239,8 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="d55a4853" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:06.723323Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:06.723048Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:07.139302Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:07.138078Z&quot;}}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>unknown <span class="op">=</span> pd.read_csv(<span class="st">"sk_unknown.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>known <span class="op">=</span> pd.read_csv(<span class="st">"sk.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>unknown <span class="op">=</span> pd.read_csv(<span class="st">"data/sk_unknown.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>known <span class="op">=</span> pd.read_csv(<span class="st">"data/sk.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -250,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="23a241db" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:07.157980Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:07.157807Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:09.592273Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:09.591123Z&quot;}}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"scored.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/scored.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Weapon"</span>] <span class="op">=</span> df[<span class="st">"Weapon"</span>].replace({<span class="st">"Strangulation - hanging"</span>: <span class="st">"Strangulation"</span>, <span class="st">"Asphyxiation - includes death by gas"</span>: <span class="st">"Strangulation"</span>})</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Decade"</span>] <span class="op">=</span> (df[<span class="st">"Year"</span>] <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"n_in_incident"</span>] <span class="op">=</span> df.groupby(<span class="st">"ID"</span>)[<span class="st">"ID"</span>].transform(<span class="st">"size"</span>)</span>
@@ -1239,8 +1239,8 @@ Unsolved series
 <div id="e063afc2" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fem_dec.to_csv(<span class="st">"fem_dec.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>flagged.to_csv(<span class="st">"flagged.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fem_dec.to_csv(<span class="st">"data/fem_dec.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>flagged.to_csv(<span class="st">"data/flagged.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 

@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="aac97260" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"clean.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/clean.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Year"</span>] <span class="op">&lt;=</span> <span class="dv">2019</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1464,9 +1464,9 @@ AUC:
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Out-of-fold AUC:"</span>, roc_auc_score(df[<span class="st">"solved"</span>], df[<span class="st">"p_solved"</span>]))</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"solved"</span>, <span class="st">"p_solved"</span>]].mean())</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"scored.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"Year"</span>, <span class="st">"solved"</span>, <span class="st">"p_solved"</span>, <span class="st">"p_casemix"</span>]].to_csv(<span class="st">"casemix.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"VicRace"</span>, <span class="st">"VicSex"</span>, <span class="st">"solved"</span>, <span class="st">"p_solved"</span>, <span class="st">"p_as_white"</span>]].to_csv(<span class="st">"race_gap.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"data/scored.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"Year"</span>, <span class="st">"solved"</span>, <span class="st">"p_solved"</span>, <span class="st">"p_casemix"</span>]].to_csv(<span class="st">"data/casemix.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"VicRace"</span>, <span class="st">"VicSex"</span>, <span class="st">"solved"</span>, <span class="st">"p_solved"</span>, <span class="st">"p_as_white"</span>]].to_csv(<span class="st">"data/race_gap.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Out-of-fold AUC: 0.7472460817811467
@@ -1880,7 +1880,7 @@ White                                0.740495  0.740900    0.740900</code></pre>
 <span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Test AUC"</span>: [<span class="fl">0.5</span>, logit_auc, tree_auc, xgb_auc],</span>
 <span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Test accuracy"</span>: [accuracy_score(y_test, np.ones(<span class="bu">len</span>(y_test), dtype<span class="op">=</span><span class="bu">int</span>)), logit_acc, tree_acc, xgb_acc],</span>
 <span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
-<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a>compare_models.to_csv(<span class="st">"model_comparison.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a>compare_models.to_csv(<span class="st">"data/model_comparison.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>compare_models</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="50">

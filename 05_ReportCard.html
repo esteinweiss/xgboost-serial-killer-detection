@@ -259,7 +259,7 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <div id="1610dc05" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"scored.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/scored.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"n_in_incident"</span>] <span class="op">=</span> df.groupby(<span class="st">"ID"</span>)[<span class="st">"ID"</span>].transform(<span class="st">"size"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"variance"</span>] <span class="op">=</span> df[<span class="st">"n_in_incident"</span>] <span class="op">*</span> df[<span class="st">"p_solved"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> df[<span class="st">"p_solved"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -636,7 +636,7 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>county[<span class="st">"gap_pts"</span>] <span class="op">=</span> county[<span class="st">"gap"</span>] <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>county[<span class="st">"enough_data"</span>] <span class="op">=</span> county[<span class="st">"n_murders"</span>] <span class="op">&gt;=</span> <span class="dv">200</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>county.to_csv(<span class="st">"report_card.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>county.to_csv(<span class="st">"data/report_card.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(county.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -650,7 +650,7 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <div id="a434fd1f" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> pd.read_csv(<span class="st">"casemix.csv"</span>).groupby(<span class="st">"Year"</span>)[[<span class="st">"solved"</span>, <span class="st">"p_casemix"</span>]].mean().reset_index()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> pd.read_csv(<span class="st">"data/casemix.csv"</span>).groupby(<span class="st">"Year"</span>)[[<span class="st">"solved"</span>, <span class="st">"p_casemix"</span>]].mean().reset_index()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> trend[[<span class="st">"Year"</span>, <span class="st">"solved"</span>]].rename(columns<span class="op">=</span>{<span class="st">"solved"</span>: <span class="st">"rate"</span>})</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>actual[<span class="st">"Line"</span>] <span class="op">=</span> <span class="st">"Actual solve rate"</span></span>
@@ -682,7 +682,7 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <div id="6d89963b" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>race <span class="op">=</span> pd.read_csv(<span class="st">"race_gap.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>race <span class="op">=</span> pd.read_csv(<span class="st">"data/race_gap.csv"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>race <span class="op">=</span> race[race[<span class="st">"VicRace"</span>].isin([<span class="st">"White"</span>, <span class="st">"Black"</span>, <span class="st">"Asian"</span>, <span class="st">"American Indian or Alaskan Native"</span>])]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>race_sum <span class="op">=</span> race.groupby(<span class="st">"VicRace"</span>)[[<span class="st">"solved"</span>, <span class="st">"p_as_white"</span>]].mean().reset_index()</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -719,7 +719,7 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <div id="b8fcc27f" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>census <span class="op">=</span> pd.read_csv(<span class="st">"census.csv"</span>, header<span class="op">=</span><span class="va">None</span>, dtype<span class="op">=</span><span class="bu">str</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>census <span class="op">=</span> pd.read_csv(<span class="st">"data/census.csv"</span>, header<span class="op">=</span><span class="va">None</span>, dtype<span class="op">=</span><span class="bu">str</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="34bdc334" class="cell" data-execution_count="51">
@@ -913,10 +913,10 @@ if (outputEl) {{
 <div id="27b62864" class="cell" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>known <span class="op">=</span> pd.read_csv(<span class="st">"sk.csv"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>unknown <span class="op">=</span> pd.read_csv(<span class="st">"sk_unknown.csv"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>fem_dec <span class="op">=</span> pd.read_csv(<span class="st">"fem_dec.csv"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>flagged <span class="op">=</span> pd.read_csv(<span class="st">"flagged.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>known <span class="op">=</span> pd.read_csv(<span class="st">"data/sk.csv"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>unknown <span class="op">=</span> pd.read_csv(<span class="st">"data/sk_unknown.csv"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>fem_dec <span class="op">=</span> pd.read_csv(<span class="st">"data/fem_dec.csv"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>flagged <span class="op">=</span> pd.read_csv(<span class="st">"data/flagged.csv"</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> county[county[<span class="st">"enough_data"</span>]].copy()</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rc.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
