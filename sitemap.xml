@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/05_ReportCard.html</loc>
-    <lastmod>2026-11-26T23:58:24.657Z</lastmod>
+    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/notebooks/05_ReportCard.html</loc>
+    <lastmod>2026-11-27T00:05:12.390Z</lastmod>
   </url>
   <url>
-    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/03_Clusters.html</loc>
-    <lastmod>2026-11-26T23:58:24.625Z</lastmod>
+    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/notebooks/03_Clusters.html</loc>
+    <lastmod>2026-11-27T00:05:12.357Z</lastmod>
   </url>
   <url>
-    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/01_Clean.html</loc>
-    <lastmod>2026-11-26T23:58:24.600Z</lastmod>
+    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/notebooks/01_Clean.html</loc>
+    <lastmod>2026-11-27T00:05:12.332Z</lastmod>
   </url>
   <url>
     <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/index.html</loc>
-    <lastmod>2026-11-26T23:58:24.658Z</lastmod>
+    <lastmod>2026-11-27T00:05:12.391Z</lastmod>
   </url>
   <url>
-    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/02_model.html</loc>
-    <lastmod>2026-11-26T23:58:24.620Z</lastmod>
+    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/notebooks/02_model.html</loc>
+    <lastmod>2026-11-27T00:05:12.352Z</lastmod>
   </url>
   <url>
-    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/04_Validate.html</loc>
-    <lastmod>2026-11-26T23:58:24.628Z</lastmod>
+    <loc>https://esteinweiss.github.io/xgboost-serial-killer-detection/notebooks/04_Validate.html</loc>
+    <lastmod>2026-11-27T00:05:12.360Z</lastmod>
   </url>
 </urlset>

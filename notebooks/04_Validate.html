@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Part 4: Validation – Cold Trail</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-940627874eaccf62d3c84b3558590d2a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3cd3af1e92d13984b99adbd03b402d65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04_Validate.html">Part 4: Validation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Cold Trail</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cold Trail: Tracking Hidden Serial Killers and the Counties That Fall Short</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01_Clean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 1: Data Cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 2: Modeling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03_Clusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 3: Serial Killer Clusters</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04_Validate.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Part 4: Validation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05_ReportCard.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Part 5: County Comparison</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#known-and-unsolved-cases" id="toc-known-and-unsolved-cases" class="nav-link active" data-scroll-target="#known-and-unsolved-cases">Known and Unsolved Cases</a></li>
+  <li><a href="#grouping-by-decade" id="toc-grouping-by-decade" class="nav-link" data-scroll-target="#grouping-by-decade">Grouping by Decade</a></li>
+  <li><a href="#flagging-groups" id="toc-flagging-groups" class="nav-link" data-scroll-target="#flagging-groups">Flagging Groups</a></li>
+  <li><a href="#confirmed-killers" id="toc-confirmed-killers" class="nav-link" data-scroll-target="#confirmed-killers">Confirmed Killers</a></li>
+  <li><a href="#unsolved-cases" id="toc-unsolved-cases" class="nav-link" data-scroll-target="#unsolved-cases">Unsolved Cases</a></li>
+  <li><a href="#how-often-the-flags-hit" id="toc-how-often-the-flags-hit" class="nav-link" data-scroll-target="#how-often-the-flags-hit">How Often the Flags Hit</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Part 4: Validation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="e35d8216" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:06.389328Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:06.389138Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:06.721094Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:06.719683Z&quot;}}" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="known-and-unsolved-cases" class="level2">
+<h2 class="anchored" data-anchor-id="known-and-unsolved-cases">Known and Unsolved Cases</h2>
+<p>I tested the flags against two lists I put together from news and court sources. One has 50 confirmed and caught serial killers. The other has 11 unsolved but suspected serial killer activity, which is what this method is really built to find. Every case has at least 3 women killed in one county, with one main weapon, in one decade.</p>
+<div id="d55a4853" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:06.723323Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:06.723048Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:07.139302Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:07.138078Z&quot;}}" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>unknown <span class="op">=</span> pd.read_csv(<span class="st">"../data/sk_unknown.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>known <span class="op">=</span> pd.read_csv(<span class="st">"../data/sk.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="grouping-by-decade" class="level2">
+<h2 class="anchored" data-anchor-id="grouping-by-decade">Grouping by Decade</h2>
+<p>Serial killers are usually active for a few years, not 44, so I rebuilt the groups by decade. Otherwise a few bad years get buried in decades of normal ones.</p>
+<div id="23a241db" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:07.157980Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:07.157807Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:09.592273Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:09.591123Z&quot;}}" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/scored.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Weapon"</span>] <span class="op">=</span> df[<span class="st">"Weapon"</span>].replace({<span class="st">"Strangulation - hanging"</span>: <span class="st">"Strangulation"</span>, <span class="st">"Asphyxiation - includes death by gas"</span>: <span class="st">"Strangulation"</span>})</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Decade"</span>] <span class="op">=</span> (df[<span class="st">"Year"</span>] <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"n_in_incident"</span>] <span class="op">=</span> df.groupby(<span class="st">"ID"</span>)[<span class="st">"ID"</span>].transform(<span class="st">"size"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"variance"</span>] <span class="op">=</span> df[<span class="st">"n_in_incident"</span>] <span class="op">*</span> df[<span class="st">"p_solved"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> df[<span class="st">"p_solved"</span>])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"unsolved_inc"</span>] <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> df[<span class="st">"solved"</span>]) <span class="op">/</span> df[<span class="st">"n_in_incident"</span>]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> [<span class="st">"CNTYFIPS"</span>, <span class="st">"VicSex"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>decade <span class="op">=</span> df.groupby(keys)[[<span class="st">"solved"</span>, <span class="st">"p_solved"</span>, <span class="st">"variance"</span>, <span class="st">"unsolved_inc"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"n_murders"</span>] <span class="op">=</span> df.groupby(keys)[<span class="st">"solved"</span>].count()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>decade <span class="op">=</span> decade.reset_index()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>decade <span class="op">=</span> decade.rename(columns<span class="op">=</span>{<span class="st">"solved"</span>: <span class="st">"actual_solved"</span>, <span class="st">"p_solved"</span>: <span class="st">"expected_solved"</span>})</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"n_unsolved"</span>] <span class="op">=</span> decade[<span class="st">"n_murders"</span>] <span class="op">-</span> decade[<span class="st">"actual_solved"</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"z_score"</span>] <span class="op">=</span> (decade[<span class="st">"actual_solved"</span>] <span class="op">-</span> decade[<span class="st">"expected_solved"</span>]) <span class="op">/</span> np.sqrt(decade[<span class="st">"variance"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>county_dec <span class="op">=</span> decade.groupby([<span class="st">"CNTYFIPS"</span>, <span class="st">"Decade"</span>])[[<span class="st">"actual_solved"</span>, <span class="st">"expected_solved"</span>]].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>county_dec <span class="op">=</span> county_dec.rename(columns<span class="op">=</span>{<span class="st">"actual_solved"</span>: <span class="st">"county_actual"</span>, <span class="st">"expected_solved"</span>: <span class="st">"county_expected"</span>})</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>decade <span class="op">=</span> decade.merge(county_dec, on<span class="op">=</span>[<span class="st">"CNTYFIPS"</span>, <span class="st">"Decade"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"county_ratio"</span>] <span class="op">=</span> (decade[<span class="st">"county_actual"</span>] <span class="op">-</span> decade[<span class="st">"actual_solved"</span>]) <span class="op">/</span> (decade[<span class="st">"county_expected"</span>] <span class="op">-</span> decade[<span class="st">"expected_solved"</span>])</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"county_ratio"</span>] <span class="op">=</span> decade[<span class="st">"county_ratio"</span>].replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"adj_expected"</span>] <span class="op">=</span> decade[<span class="st">"expected_solved"</span>] <span class="op">*</span> decade[<span class="st">"county_ratio"</span>]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>decade[<span class="st">"adj_z_score"</span>] <span class="op">=</span> (decade[<span class="st">"actual_solved"</span>] <span class="op">-</span> decade[<span class="st">"adj_expected"</span>]) <span class="op">/</span> np.sqrt(decade[<span class="st">"variance"</span>])</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decade.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(92425, 16)</code></pre>
+</div>
+</div>
+<p>92,425 groups.</p>
+<div id="63617785" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fem_dec <span class="op">=</span> decade[(decade[<span class="st">"VicSex"</span>] <span class="op">==</span> <span class="st">"Female"</span>) <span class="op">&amp;</span> (decade[<span class="st">"unsolved_inc"</span>] <span class="op">&gt;=</span> <span class="dv">5</span>)].copy()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fem_dec.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>(1459, 16)</code></pre>
+</div>
+</div>
+<p>1,459 female-victim groups with at least 5 separate unsolved incidents.</p>
+</section>
+<section id="flagging-groups" class="level2">
+<h2 class="anchored" data-anchor-id="flagging-groups">Flagging Groups</h2>
+<p>I flagged any group below −3, and I picked that cutoff before checking either list. A score that low almost never happens by chance.</p>
+<div id="34c54e1e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:09.606292Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:09.606148Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:09.623942Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:09.623023Z&quot;}}" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flagged <span class="op">=</span> fem_dec[fem_dec[<span class="st">"adj_z_score"</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">3</span>].sort_values(<span class="st">"adj_z_score"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(flagged))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>flagged[[<span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>, <span class="st">"n_murders"</span>, <span class="st">"n_unsolved"</span>, <span class="st">"adj_z_score"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>37</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CNTYFIPS</th>
+<th data-quarto-table-cell-role="th">Weapon</th>
+<th data-quarto-table-cell-role="th">Decade</th>
+<th data-quarto-table-cell-role="th">n_murders</th>
+<th data-quarto-table-cell-role="th">n_unsolved</th>
+<th data-quarto-table-cell-role="th">adj_z_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">67152</th>
+<td>Polk, FL</td>
+<td>Personal weapons, includes beating</td>
+<td>2000</td>
+<td>9</td>
+<td>5</td>
+<td>-5.903924</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6393</th>
+<td>Bexar, TX</td>
+<td>Knife or cutting instrument</td>
+<td>1990</td>
+<td>51</td>
+<td>24</td>
+<td>-5.014708</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">21206</th>
+<td>Dauphin, PA</td>
+<td>Personal weapons, includes beating</td>
+<td>1980</td>
+<td>11</td>
+<td>7</td>
+<td>-4.585445</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">77404</th>
+<td>Spokane, WA</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1990</td>
+<td>26</td>
+<td>11</td>
+<td>-4.535716</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5312</th>
+<td>Bell, TX</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>1970</td>
+<td>9</td>
+<td>6</td>
+<td>-4.398141</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21776</th>
+<td>De Kalb, GA</td>
+<td>Rifle</td>
+<td>2010</td>
+<td>6</td>
+<td>5</td>
+<td>-4.126173</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">60030</th>
+<td>New York, NY</td>
+<td>Personal weapons, includes beating</td>
+<td>2000</td>
+<td>155</td>
+<td>66</td>
+<td>-4.041597</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6134</th>
+<td>Bernalillo, NM</td>
+<td>Other or type unknown</td>
+<td>2000</td>
+<td>14</td>
+<td>13</td>
+<td>-3.959136</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20809</th>
+<td>Dallas, TX</td>
+<td>Firearm, type not stated</td>
+<td>1990</td>
+<td>57</td>
+<td>48</td>
+<td>-3.803483</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39690</th>
+<td>Jackson, MO</td>
+<td>Strangulation</td>
+<td>1980</td>
+<td>42</td>
+<td>34</td>
+<td>-3.745797</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">40374</th>
+<td>Jefferson, AL</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>2010</td>
+<td>46</td>
+<td>23</td>
+<td>-3.725788</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">40880</th>
+<td>Jefferson, LA</td>
+<td>Knife or cutting instrument</td>
+<td>1970</td>
+<td>7</td>
+<td>5</td>
+<td>-3.676791</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">49206</th>
+<td>Los Angeles, CA</td>
+<td>Handgun - pistol, revolver, etc</td>
+<td>2000</td>
+<td>689</td>
+<td>261</td>
+<td>-3.626736</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">20438</th>
+<td>Cuyahoga, OH</td>
+<td>Other or type unknown</td>
+<td>2010</td>
+<td>51</td>
+<td>33</td>
+<td>-3.610623</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">73278</th>
+<td>San Joaquin, CA</td>
+<td>Blunt object - hammer, club, etc</td>
+<td>2000</td>
+<td>5</td>
+<td>5</td>
+<td>-3.532383</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">62680</th>
+<td>Orange, FL</td>
+<td>Personal weapons, includes beating</td>
+<td>2000</td>
+<td>35</td>
+<td>8</td>
+<td>-3.489385</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3973</th>
+<td>Baltimore, MD</td>
+<td>Personal weapons, includes beating</td>
+<td>2000</td>
+<td>36</td>
+<td>7</td>
+<td>-3.465263</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6395</th>
+<td>Bexar, TX</td>
+<td>Knife or cutting instrument</td>
+<td>2010</td>
+<td>60</td>
+<td>18</td>
+<td>-3.460720</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20810</th>
+<td>Dallas, TX</td>
+<td>Firearm, type not stated</td>
+<td>2000</td>
+<td>29</td>
+<td>24</td>
+<td>-3.455069</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">43169</th>
+<td>Kern, CA</td>
+<td>Knife or cutting instrument</td>
+<td>1990</td>
+<td>21</td>
+<td>11</td>
+<td>-3.401570</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34669</th>
+<td>Harris, TX</td>
+<td>Blunt object - hammer, club, etc</td>
+<td>2000</td>
+<td>54</td>
+<td>23</td>
+<td>-3.322677</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">49749</th>
+<td>Lucas, OH</td>
+<td>Strangulation</td>
+<td>2000</td>
+<td>6</td>
+<td>5</td>
+<td>-3.295650</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18590</th>
+<td>Cook, IL</td>
+<td>Strangulation</td>
+<td>2000</td>
+<td>54</td>
+<td>41</td>
+<td>-3.285142</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">20440</th>
+<td>Cuyahoga, OH</td>
+<td>Personal weapons, includes beating</td>
+<td>1980</td>
+<td>82</td>
+<td>37</td>
+<td>-3.281790</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10336</th>
+<td>Calcasieu, LA</td>
+<td>Knife or cutting instrument</td>
+<td>1990</td>
+<td>13</td>
+<td>5</td>
+<td>-3.272833</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">24415</th>
+<td>Duval, FL</td>
+<td>Firearm, type not stated</td>
+<td>2010</td>
+<td>18</td>
+<td>15</td>
+<td>-3.217346</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8530</th>
+<td>Broward, FL</td>
+<td>Blunt object - hammer, club, etc</td>
+<td>1980</td>
+<td>15</td>
+<td>11</td>
+<td>-3.168883</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">36890</th>
+<td>Hinds, MS</td>
+<td>Personal weapons, includes beating</td>
+<td>1990</td>
+<td>9</td>
+<td>5</td>
+<td>-3.166746</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">68826</th>
+<td>Pulaski, MO</td>
+<td>Other or type unknown</td>
+<td>2010</td>
+<td>7</td>
+<td>6</td>
+<td>-3.127001</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">44579</th>
+<td>Lafayette, LA</td>
+<td>Other or type unknown</td>
+<td>1990</td>
+<td>9</td>
+<td>8</td>
+<td>-3.114376</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">29804</th>
+<td>Galveston, TX</td>
+<td>Knife or cutting instrument</td>
+<td>1980</td>
+<td>17</td>
+<td>11</td>
+<td>-3.091185</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">60242</th>
+<td>Newport News, VA</td>
+<td>Other or type unknown</td>
+<td>2010</td>
+<td>6</td>
+<td>5</td>
+<td>-3.069757</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">56711</th>
+<td>Monroe, NY</td>
+<td>Strangulation</td>
+<td>1990</td>
+<td>10</td>
+<td>9</td>
+<td>-3.059276</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">77731</th>
+<td>St. Clair, IL</td>
+<td>Knife or cutting instrument</td>
+<td>1970</td>
+<td>5</td>
+<td>5</td>
+<td>-3.052686</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36867</th>
+<td>Hinds, MS</td>
+<td>Blunt object - hammer, club, etc</td>
+<td>2000</td>
+<td>7</td>
+<td>6</td>
+<td>-3.050598</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">66428</th>
+<td>Pinellas, FL</td>
+<td>Blunt object - hammer, club, etc</td>
+<td>2000</td>
+<td>10</td>
+<td>6</td>
+<td>-3.036027</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">9071</th>
+<td>Bucks, PA</td>
+<td>Knife or cutting instrument</td>
+<td>1970</td>
+<td>7</td>
+<td>6</td>
+<td>-3.011030</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>37 of the 1,459 groups got flagged.</p>
+</section>
+<section id="confirmed-killers" class="level2">
+<h2 class="anchored" data-anchor-id="confirmed-killers">Confirmed Killers</h2>
+<div id="e95a8076" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-11-13T21:33:09.625651Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-11-13T21:33:09.625490Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-11-13T21:33:09.640221Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-11-13T21:33:09.639050Z&quot;}}" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> known.merge(fem_dec, on<span class="op">=</span>[<span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>check[<span class="st">"Scoreable"</span>] <span class="op">=</span> np.where(check[<span class="st">"adj_z_score"</span>].notna(), <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> check.sort_values(<span class="st">"adj_z_score"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>check[<span class="st">"flagged"</span>] <span class="op">=</span> np.where(check[<span class="st">"adj_z_score"</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">3</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Scoreable:"</span>, (check[<span class="st">"Scoreable"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).<span class="bu">sum</span>(), <span class="st">"of"</span>, <span class="bu">len</span>(check))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>check[check[<span class="st">"Scoreable"</span>] <span class="op">==</span> <span class="st">"Yes"</span>][[<span class="st">"Killer"</span>, <span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>, <span class="st">"n_unsolved"</span>, <span class="st">"n_murders"</span>, <span class="st">"adj_z_score"</span>, <span class="st">"flagged"</span>]].style.hide(axis<span class="op">=</span><span class="st">"index"</span>).<span class="bu">format</span>(precision<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Scoreable: 34 of 50</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<style type="text/css">
+</style>
+
+<table id="T_c1a62" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th id="T_c1a62_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Killer</th>
+<th id="T_c1a62_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">CNTYFIPS</th>
+<th id="T_c1a62_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Weapon</th>
+<th id="T_c1a62_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Decade</th>
+<th id="T_c1a62_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">n_unsolved</th>
+<th id="T_c1a62_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">n_murders</th>
+<th id="T_c1a62_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">adj_z_score</th>
+<th id="T_c1a62_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">flagged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_c1a62_row0_col0" class="data row0 col0">Robert Lee Yates</td>
+<td id="T_c1a62_row0_col1" class="data row0 col1">Spokane, WA</td>
+<td id="T_c1a62_row0_col2" class="data row0 col2">Handgun - pistol, revolver, etc</td>
+<td id="T_c1a62_row0_col3" class="data row0 col3">1990</td>
+<td id="T_c1a62_row0_col4" class="data row0 col4">11.00</td>
+<td id="T_c1a62_row0_col5" class="data row0 col5">26.00</td>
+<td id="T_c1a62_row0_col6" class="data row0 col6">-4.54</td>
+<td id="T_c1a62_row0_col7" class="data row0 col7">Yes</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row1_col0" class="data row1 col0">Lorenzo Gilyard</td>
+<td id="T_c1a62_row1_col1" class="data row1 col1">Jackson, MO</td>
+<td id="T_c1a62_row1_col2" class="data row1 col2">Strangulation</td>
+<td id="T_c1a62_row1_col3" class="data row1 col3">1980</td>
+<td id="T_c1a62_row1_col4" class="data row1 col4">34.00</td>
+<td id="T_c1a62_row1_col5" class="data row1 col5">42.00</td>
+<td id="T_c1a62_row1_col6" class="data row1 col6">-3.75</td>
+<td id="T_c1a62_row1_col7" class="data row1 col7">Yes</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row2_col0" class="data row2 col0">Dellmus Colvin</td>
+<td id="T_c1a62_row2_col1" class="data row2 col1">Lucas, OH</td>
+<td id="T_c1a62_row2_col2" class="data row2 col2">Strangulation</td>
+<td id="T_c1a62_row2_col3" class="data row2 col3">2000</td>
+<td id="T_c1a62_row2_col4" class="data row2 col4">5.00</td>
+<td id="T_c1a62_row2_col5" class="data row2 col5">6.00</td>
+<td id="T_c1a62_row2_col6" class="data row2 col6">-3.30</td>
+<td id="T_c1a62_row2_col7" class="data row2 col7">Yes</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row3_col0" class="data row3 col0">Derrick Todd Lee</td>
+<td id="T_c1a62_row3_col1" class="data row3 col1">East Baton Rouge, LA</td>
+<td id="T_c1a62_row3_col2" class="data row3 col2">Knife or cutting instrument</td>
+<td id="T_c1a62_row3_col3" class="data row3 col3">2000</td>
+<td id="T_c1a62_row3_col4" class="data row3 col4">7.00</td>
+<td id="T_c1a62_row3_col5" class="data row3 col5">18.00</td>
+<td id="T_c1a62_row3_col6" class="data row3 col6">-2.60</td>
+<td id="T_c1a62_row3_col7" class="data row3 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row4_col0" class="data row4 col0">Gerald Parker</td>
+<td id="T_c1a62_row4_col1" class="data row4 col1">Orange, CA</td>
+<td id="T_c1a62_row4_col2" class="data row4 col2">Blunt object - hammer, club, etc</td>
+<td id="T_c1a62_row4_col3" class="data row4 col3">1970</td>
+<td id="T_c1a62_row4_col4" class="data row4 col4">10.00</td>
+<td id="T_c1a62_row4_col5" class="data row4 col5">14.00</td>
+<td id="T_c1a62_row4_col6" class="data row4 col6">-2.16</td>
+<td id="T_c1a62_row4_col7" class="data row4 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row5_col0" class="data row5 col0">Sean Vincent Gillis</td>
+<td id="T_c1a62_row5_col1" class="data row5 col1">East Baton Rouge, LA</td>
+<td id="T_c1a62_row5_col2" class="data row5 col2">Strangulation</td>
+<td id="T_c1a62_row5_col3" class="data row5 col3">2000</td>
+<td id="T_c1a62_row5_col4" class="data row5 col4">7.00</td>
+<td id="T_c1a62_row5_col5" class="data row5 col5">10.00</td>
+<td id="T_c1a62_row5_col6" class="data row5 col6">-2.00</td>
+<td id="T_c1a62_row5_col7" class="data row5 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row6_col0" class="data row6 col0">Benjamin Atkins</td>
+<td id="T_c1a62_row6_col1" class="data row6 col1">Wayne, MI</td>
+<td id="T_c1a62_row6_col2" class="data row6 col2">Strangulation</td>
+<td id="T_c1a62_row6_col3" class="data row6 col3">1990</td>
+<td id="T_c1a62_row6_col4" class="data row6 col4">58.00</td>
+<td id="T_c1a62_row6_col5" class="data row6 col5">89.00</td>
+<td id="T_c1a62_row6_col6" class="data row6 col6">-1.82</td>
+<td id="T_c1a62_row6_col7" class="data row6 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row7_col0" class="data row7 col0">Dayton Leroy Rogers</td>
+<td id="T_c1a62_row7_col1" class="data row7 col1">Clackamas, OR</td>
+<td id="T_c1a62_row7_col2" class="data row7 col2">Knife or cutting instrument</td>
+<td id="T_c1a62_row7_col3" class="data row7 col3">1980</td>
+<td id="T_c1a62_row7_col4" class="data row7 col4">9.00</td>
+<td id="T_c1a62_row7_col5" class="data row7 col5">13.00</td>
+<td id="T_c1a62_row7_col6" class="data row7 col6">-1.60</td>
+<td id="T_c1a62_row7_col7" class="data row7 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row8_col0" class="data row8 col0">Coral Eugene Watts</td>
+<td id="T_c1a62_row8_col1" class="data row8 col1">Harris, TX</td>
+<td id="T_c1a62_row8_col2" class="data row8 col2">Strangulation</td>
+<td id="T_c1a62_row8_col3" class="data row8 col3">1980</td>
+<td id="T_c1a62_row8_col4" class="data row8 col4">32.00</td>
+<td id="T_c1a62_row8_col5" class="data row8 col5">52.00</td>
+<td id="T_c1a62_row8_col6" class="data row8 col6">-1.28</td>
+<td id="T_c1a62_row8_col7" class="data row8 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row9_col0" class="data row9 col0">Harrison Graham</td>
+<td id="T_c1a62_row9_col1" class="data row9 col1">Philadelphia, PA</td>
+<td id="T_c1a62_row9_col2" class="data row9 col2">Strangulation</td>
+<td id="T_c1a62_row9_col3" class="data row9 col3">1980</td>
+<td id="T_c1a62_row9_col4" class="data row9 col4">32.00</td>
+<td id="T_c1a62_row9_col5" class="data row9 col5">55.00</td>
+<td id="T_c1a62_row9_col6" class="data row9 col6">-1.15</td>
+<td id="T_c1a62_row9_col7" class="data row9 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row10_col0" class="data row10 col0">Frederick Pete Cox</td>
+<td id="T_c1a62_row10_col1" class="data row10 col1">Orange, FL</td>
+<td id="T_c1a62_row10_col2" class="data row10 col2">Firearm, type not stated</td>
+<td id="T_c1a62_row10_col3" class="data row10 col3">1990</td>
+<td id="T_c1a62_row10_col4" class="data row10 col4">7.00</td>
+<td id="T_c1a62_row10_col5" class="data row10 col5">31.00</td>
+<td id="T_c1a62_row10_col6" class="data row10 col6">-1.12</td>
+<td id="T_c1a62_row10_col7" class="data row10 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row11_col0" class="data row11 col0">Samuel Little</td>
+<td id="T_c1a62_row11_col1" class="data row11 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row11_col2" class="data row11 col2">Strangulation</td>
+<td id="T_c1a62_row11_col3" class="data row11 col3">1980</td>
+<td id="T_c1a62_row11_col4" class="data row11 col4">102.00</td>
+<td id="T_c1a62_row11_col5" class="data row11 col5">192.00</td>
+<td id="T_c1a62_row11_col6" class="data row11 col6">-1.10</td>
+<td id="T_c1a62_row11_col7" class="data row11 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row12_col0" class="data row12 col0">Louis Craine</td>
+<td id="T_c1a62_row12_col1" class="data row12 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row12_col2" class="data row12 col2">Strangulation</td>
+<td id="T_c1a62_row12_col3" class="data row12 col3">1980</td>
+<td id="T_c1a62_row12_col4" class="data row12 col4">102.00</td>
+<td id="T_c1a62_row12_col5" class="data row12 col5">192.00</td>
+<td id="T_c1a62_row12_col6" class="data row12 col6">-1.10</td>
+<td id="T_c1a62_row12_col7" class="data row12 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row13_col0" class="data row13 col0">Anthony Shore</td>
+<td id="T_c1a62_row13_col1" class="data row13 col1">Harris, TX</td>
+<td id="T_c1a62_row13_col2" class="data row13 col2">Strangulation</td>
+<td id="T_c1a62_row13_col3" class="data row13 col3">1990</td>
+<td id="T_c1a62_row13_col4" class="data row13 col4">28.00</td>
+<td id="T_c1a62_row13_col5" class="data row13 col5">56.00</td>
+<td id="T_c1a62_row13_col6" class="data row13 col6">-0.98</td>
+<td id="T_c1a62_row13_col7" class="data row13 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row14_col0" class="data row14 col0">Shelly Brooks</td>
+<td id="T_c1a62_row14_col1" class="data row14 col1">Wayne, MI</td>
+<td id="T_c1a62_row14_col2" class="data row14 col2">Strangulation</td>
+<td id="T_c1a62_row14_col3" class="data row14 col3">2000</td>
+<td id="T_c1a62_row14_col4" class="data row14 col4">9.00</td>
+<td id="T_c1a62_row14_col5" class="data row14 col5">19.00</td>
+<td id="T_c1a62_row14_col6" class="data row14 col6">-0.92</td>
+<td id="T_c1a62_row14_col7" class="data row14 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row15_col0" class="data row15 col0">John Eric Armstrong</td>
+<td id="T_c1a62_row15_col1" class="data row15 col1">Wayne, MI</td>
+<td id="T_c1a62_row15_col2" class="data row15 col2">Strangulation</td>
+<td id="T_c1a62_row15_col3" class="data row15 col3">2000</td>
+<td id="T_c1a62_row15_col4" class="data row15 col4">9.00</td>
+<td id="T_c1a62_row15_col5" class="data row15 col5">19.00</td>
+<td id="T_c1a62_row15_col6" class="data row15 col6">-0.92</td>
+<td id="T_c1a62_row15_col7" class="data row15 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row16_col0" class="data row16 col0">Lucky Ward</td>
+<td id="T_c1a62_row16_col1" class="data row16 col1">Harris, TX</td>
+<td id="T_c1a62_row16_col2" class="data row16 col2">Strangulation</td>
+<td id="T_c1a62_row16_col3" class="data row16 col3">2010</td>
+<td id="T_c1a62_row16_col4" class="data row16 col4">8.00</td>
+<td id="T_c1a62_row16_col5" class="data row16 col5">25.00</td>
+<td id="T_c1a62_row16_col6" class="data row16 col6">-0.89</td>
+<td id="T_c1a62_row16_col7" class="data row16 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row17_col0" class="data row17 col0">Bobby Joe Long</td>
+<td id="T_c1a62_row17_col1" class="data row17 col1">Hillsborough, FL</td>
+<td id="T_c1a62_row17_col2" class="data row17 col2">Strangulation</td>
+<td id="T_c1a62_row17_col3" class="data row17 col3">1980</td>
+<td id="T_c1a62_row17_col4" class="data row17 col4">14.00</td>
+<td id="T_c1a62_row17_col5" class="data row17 col5">23.00</td>
+<td id="T_c1a62_row17_col6" class="data row17 col6">-0.88</td>
+<td id="T_c1a62_row17_col7" class="data row17 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row18_col0" class="data row18 col0">Rex Heuermann (Gilgo Beach)</td>
+<td id="T_c1a62_row18_col1" class="data row18 col1">Suffolk, NY</td>
+<td id="T_c1a62_row18_col2" class="data row18 col2">Other or type unknown</td>
+<td id="T_c1a62_row18_col3" class="data row18 col3">2000</td>
+<td id="T_c1a62_row18_col4" class="data row18 col4">7.00</td>
+<td id="T_c1a62_row18_col5" class="data row18 col5">11.00</td>
+<td id="T_c1a62_row18_col6" class="data row18 col6">-0.75</td>
+<td id="T_c1a62_row18_col7" class="data row18 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row19_col0" class="data row19 col0">Hillside Stranglers</td>
+<td id="T_c1a62_row19_col1" class="data row19 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row19_col2" class="data row19 col2">Strangulation</td>
+<td id="T_c1a62_row19_col3" class="data row19 col3">1970</td>
+<td id="T_c1a62_row19_col4" class="data row19 col4">43.00</td>
+<td id="T_c1a62_row19_col5" class="data row19 col5">75.00</td>
+<td id="T_c1a62_row19_col6" class="data row19 col6">-0.28</td>
+<td id="T_c1a62_row19_col7" class="data row19 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row20_col0" class="data row20 col0">Morris Solomon Jr.</td>
+<td id="T_c1a62_row20_col1" class="data row20 col1">Sacramento, CA</td>
+<td id="T_c1a62_row20_col2" class="data row20 col2">Strangulation</td>
+<td id="T_c1a62_row20_col3" class="data row20 col3">1980</td>
+<td id="T_c1a62_row20_col4" class="data row20 col4">9.00</td>
+<td id="T_c1a62_row20_col5" class="data row20 col5">20.00</td>
+<td id="T_c1a62_row20_col6" class="data row20 col6">-0.26</td>
+<td id="T_c1a62_row20_col7" class="data row20 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row21_col0" class="data row21 col0">Joseph DeAngelo (Orange County)</td>
+<td id="T_c1a62_row21_col1" class="data row21 col1">Orange, CA</td>
+<td id="T_c1a62_row21_col2" class="data row21 col2">Blunt object - hammer, club, etc</td>
+<td id="T_c1a62_row21_col3" class="data row21 col3">1980</td>
+<td id="T_c1a62_row21_col4" class="data row21 col4">16.00</td>
+<td id="T_c1a62_row21_col5" class="data row21 col5">42.00</td>
+<td id="T_c1a62_row21_col6" class="data row21 col6">-0.22</td>
+<td id="T_c1a62_row21_col7" class="data row21 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row22_col0" class="data row22 col0">Michael Hughes</td>
+<td id="T_c1a62_row22_col1" class="data row22 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row22_col2" class="data row22 col2">Strangulation</td>
+<td id="T_c1a62_row22_col3" class="data row22 col3">1990</td>
+<td id="T_c1a62_row22_col4" class="data row22 col4">107.00</td>
+<td id="T_c1a62_row22_col5" class="data row22 col5">235.00</td>
+<td id="T_c1a62_row22_col6" class="data row22 col6">-0.20</td>
+<td id="T_c1a62_row22_col7" class="data row22 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row23_col0" class="data row23 col0">Chester Turner</td>
+<td id="T_c1a62_row23_col1" class="data row23 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row23_col2" class="data row23 col2">Strangulation</td>
+<td id="T_c1a62_row23_col3" class="data row23 col3">1990</td>
+<td id="T_c1a62_row23_col4" class="data row23 col4">107.00</td>
+<td id="T_c1a62_row23_col5" class="data row23 col5">235.00</td>
+<td id="T_c1a62_row23_col6" class="data row23 col6">-0.20</td>
+<td id="T_c1a62_row23_col7" class="data row23 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row24_col0" class="data row24 col0">Gary Ridgway</td>
+<td id="T_c1a62_row24_col1" class="data row24 col1">King, WA</td>
+<td id="T_c1a62_row24_col2" class="data row24 col2">Strangulation</td>
+<td id="T_c1a62_row24_col3" class="data row24 col3">1980</td>
+<td id="T_c1a62_row24_col4" class="data row24 col4">18.00</td>
+<td id="T_c1a62_row24_col5" class="data row24 col5">31.00</td>
+<td id="T_c1a62_row24_col6" class="data row24 col6">-0.15</td>
+<td id="T_c1a62_row24_col7" class="data row24 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row25_col0" class="data row25 col0">Cleophus Prince Jr.</td>
+<td id="T_c1a62_row25_col1" class="data row25 col1">San Diego, CA</td>
+<td id="T_c1a62_row25_col2" class="data row25 col2">Knife or cutting instrument</td>
+<td id="T_c1a62_row25_col3" class="data row25 col3">1990</td>
+<td id="T_c1a62_row25_col4" class="data row25 col4">26.00</td>
+<td id="T_c1a62_row25_col5" class="data row25 col5">78.00</td>
+<td id="T_c1a62_row25_col6" class="data row25 col6">-0.09</td>
+<td id="T_c1a62_row25_col7" class="data row25 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row26_col0" class="data row26 col0">Andre Crawford</td>
+<td id="T_c1a62_row26_col1" class="data row26 col1">Cook, IL</td>
+<td id="T_c1a62_row26_col2" class="data row26 col2">Blunt object - hammer, club, etc</td>
+<td id="T_c1a62_row26_col3" class="data row26 col3">1990</td>
+<td id="T_c1a62_row26_col4" class="data row26 col4">25.00</td>
+<td id="T_c1a62_row26_col5" class="data row26 col5">77.00</td>
+<td id="T_c1a62_row26_col6" class="data row26 col6">0.20</td>
+<td id="T_c1a62_row26_col7" class="data row26 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row27_col0" class="data row27 col0">William Suff</td>
+<td id="T_c1a62_row27_col1" class="data row27 col1">Riverside, CA</td>
+<td id="T_c1a62_row27_col2" class="data row27 col2">Knife or cutting instrument</td>
+<td id="T_c1a62_row27_col3" class="data row27 col3">1990</td>
+<td id="T_c1a62_row27_col4" class="data row27 col4">9.00</td>
+<td id="T_c1a62_row27_col5" class="data row27 col5">45.00</td>
+<td id="T_c1a62_row27_col6" class="data row27 col6">0.24</td>
+<td id="T_c1a62_row27_col7" class="data row27 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row28_col0" class="data row28 col0">Mark Goudeau</td>
+<td id="T_c1a62_row28_col1" class="data row28 col1">Maricopa, AZ</td>
+<td id="T_c1a62_row28_col2" class="data row28 col2">Handgun - pistol, revolver, etc</td>
+<td id="T_c1a62_row28_col3" class="data row28 col3">2000</td>
+<td id="T_c1a62_row28_col4" class="data row28 col4">54.00</td>
+<td id="T_c1a62_row28_col5" class="data row28 col5">256.00</td>
+<td id="T_c1a62_row28_col6" class="data row28 col6">0.32</td>
+<td id="T_c1a62_row28_col7" class="data row28 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row29_col0" class="data row29 col0">Lonnie Franklin Jr.</td>
+<td id="T_c1a62_row29_col1" class="data row29 col1">Los Angeles, CA</td>
+<td id="T_c1a62_row29_col2" class="data row29 col2">Handgun - pistol, revolver, etc</td>
+<td id="T_c1a62_row29_col3" class="data row29 col3">1980</td>
+<td id="T_c1a62_row29_col4" class="data row29 col4">201.00</td>
+<td id="T_c1a62_row29_col5" class="data row29 col5">929.00</td>
+<td id="T_c1a62_row29_col6" class="data row29 col6">1.02</td>
+<td id="T_c1a62_row29_col7" class="data row29 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row30_col0" class="data row30 col0">Terry Blair</td>
+<td id="T_c1a62_row30_col1" class="data row30 col1">Jackson, MO</td>
+<td id="T_c1a62_row30_col2" class="data row30 col2">Other or type unknown</td>
+<td id="T_c1a62_row30_col3" class="data row30 col3">2000</td>
+<td id="T_c1a62_row30_col4" class="data row30 col4">6.00</td>
+<td id="T_c1a62_row30_col5" class="data row30 col5">29.00</td>
+<td id="T_c1a62_row30_col6" class="data row30 col6">1.31</td>
+<td id="T_c1a62_row30_col7" class="data row30 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row31_col0" class="data row31 col0">Henry Louis Wallace</td>
+<td id="T_c1a62_row31_col1" class="data row31 col1">Mecklenburg, NC</td>
+<td id="T_c1a62_row31_col2" class="data row31 col2">Strangulation</td>
+<td id="T_c1a62_row31_col3" class="data row31 col3">1990</td>
+<td id="T_c1a62_row31_col4" class="data row31 col4">6.00</td>
+<td id="T_c1a62_row31_col5" class="data row31 col5">19.00</td>
+<td id="T_c1a62_row31_col6" class="data row31 col6">1.77</td>
+<td id="T_c1a62_row31_col7" class="data row31 col7">No</td>
+</tr>
+<tr class="odd">
+<td id="T_c1a62_row32_col0" class="data row32 col0">Hubert Geralds</td>
+<td id="T_c1a62_row32_col1" class="data row32 col1">Cook, IL</td>
+<td id="T_c1a62_row32_col2" class="data row32 col2">Strangulation</td>
+<td id="T_c1a62_row32_col3" class="data row32 col3">1990</td>
+<td id="T_c1a62_row32_col4" class="data row32 col4">30.00</td>
+<td id="T_c1a62_row32_col5" class="data row32 col5">84.00</td>
+<td id="T_c1a62_row32_col6" class="data row32 col6">2.42</td>
+<td id="T_c1a62_row32_col7" class="data row32 col7">No</td>
+</tr>
+<tr class="even">
+<td id="T_c1a62_row33_col0" class="data row33 col0">Charles Albright</td>
+<td id="T_c1a62_row33_col1" class="data row33 col1">Dallas, TX</td>
+<td id="T_c1a62_row33_col2" class="data row33 col2">Handgun - pistol, revolver, etc</td>
+<td id="T_c1a62_row33_col3" class="data row33 col3">1990</td>
+<td id="T_c1a62_row33_col4" class="data row33 col4">61.00</td>
+<td id="T_c1a62_row33_col5" class="data row33 col5">292.00</td>
+<td id="T_c1a62_row33_col6" class="data row33 col6">3.47</td>
+<td id="T_c1a62_row33_col7" class="data row33 col7">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>34 of the 50 killers fall in a group the model can score. Yates (Spokane), Gilyard (Kansas City), and Colvin (Toledo) got flagged. Derrick Todd Lee just missed at −2.60.</p>
+</section>
+<section id="unsolved-cases" class="level2">
+<h2 class="anchored" data-anchor-id="unsolved-cases">Unsolved Cases</h2>
+<div id="1c335395" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>unsolved_check <span class="op">=</span> unknown.merge(fem_dec, on<span class="op">=</span>[<span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>unsolved_check[<span class="st">"Scoreable"</span>] <span class="op">=</span> np.where(unsolved_check[<span class="st">"adj_z_score"</span>].notna(), <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>unsolved_check <span class="op">=</span> unsolved_check.sort_values(<span class="st">"adj_z_score"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>unsolved_check[<span class="st">"flagged"</span>] <span class="op">=</span> np.where(unsolved_check[<span class="st">"adj_z_score"</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">3</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>unsolved_check[[<span class="st">"Killer"</span>, <span class="st">"Status"</span>, <span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>, <span class="st">"n_unsolved"</span>, <span class="st">"n_murders"</span>, <span class="st">"adj_z_score"</span>, <span class="st">"flagged"</span>]].style.hide(axis<span class="op">=</span><span class="st">"index"</span>).<span class="bu">format</span>(precision<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<style type="text/css">
+</style>
+
+<table id="T_7fada" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th id="T_7fada_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Killer</th>
+<th id="T_7fada_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Status</th>
+<th id="T_7fada_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">CNTYFIPS</th>
+<th id="T_7fada_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Weapon</th>
+<th id="T_7fada_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Decade</th>
+<th id="T_7fada_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">n_unsolved</th>
+<th id="T_7fada_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">n_murders</th>
+<th id="T_7fada_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">adj_z_score</th>
+<th id="T_7fada_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">flagged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_7fada_row0_col0" class="data row0 col0">West Mesa murders</td>
+<td id="T_7fada_row0_col1" class="data row0 col1">Unsolved - treated as serial</td>
+<td id="T_7fada_row0_col2" class="data row0 col2">Bernalillo, NM</td>
+<td id="T_7fada_row0_col3" class="data row0 col3">Other or type unknown</td>
+<td id="T_7fada_row0_col4" class="data row0 col4">2000</td>
+<td id="T_7fada_row0_col5" class="data row0 col5">13.00</td>
+<td id="T_7fada_row0_col6" class="data row0 col6">14.00</td>
+<td id="T_7fada_row0_col7" class="data row0 col7">-3.96</td>
+<td id="T_7fada_row0_col8" class="data row0 col8">Yes</td>
+</tr>
+<tr class="even">
+<td id="T_7fada_row1_col0" class="data row1 col0">New Bedford Highway Killer</td>
+<td id="T_7fada_row1_col1" class="data row1 col1">Unsolved - treated as serial</td>
+<td id="T_7fada_row1_col2" class="data row1 col2">Bristol, MA</td>
+<td id="T_7fada_row1_col3" class="data row1 col3">Other or type unknown</td>
+<td id="T_7fada_row1_col4" class="data row1 col4">1980</td>
+<td id="T_7fada_row1_col5" class="data row1 col5">6.00</td>
+<td id="T_7fada_row1_col6" class="data row1 col6">7.00</td>
+<td id="T_7fada_row1_col7" class="data row1 col7">-1.91</td>
+<td id="T_7fada_row1_col8" class="data row1 col8">No</td>
+</tr>
+<tr class="odd">
+<td id="T_7fada_row2_col0" class="data row2 col0">South Memphis sex worker killings</td>
+<td id="T_7fada_row2_col1" class="data row2 col1">Unsolved - police linked by DNA</td>
+<td id="T_7fada_row2_col2" class="data row2 col2">Shelby, TN</td>
+<td id="T_7fada_row2_col3" class="data row2 col3">Firearm, type not stated</td>
+<td id="T_7fada_row2_col4" class="data row2 col4">2010</td>
+<td id="T_7fada_row2_col5" class="data row2 col5">19.00</td>
+<td id="T_7fada_row2_col6" class="data row2 col6">52.00</td>
+<td id="T_7fada_row2_col7" class="data row2 col7">-1.68</td>
+<td id="T_7fada_row2_col8" class="data row2 col8">No</td>
+</tr>
+<tr class="even">
+<td id="T_7fada_row3_col0" class="data row3 col0">Texas Killing Fields (Calder Road)</td>
+<td id="T_7fada_row3_col1" class="data row3 col1">Unsolved - prime suspect died; 2026 indictment in 2 cases</td>
+<td id="T_7fada_row3_col2" class="data row3 col2">Galveston, TX</td>
+<td id="T_7fada_row3_col3" class="data row3 col3">Other or type unknown</td>
+<td id="T_7fada_row3_col4" class="data row3 col4">1980</td>
+<td id="T_7fada_row3_col5" class="data row3 col5">5.00</td>
+<td id="T_7fada_row3_col6" class="data row3 col6">5.00</td>
+<td id="T_7fada_row3_col7" class="data row3 col7">-1.31</td>
+<td id="T_7fada_row3_col8" class="data row3 col8">No</td>
+</tr>
+<tr class="odd">
+<td id="T_7fada_row4_col0" class="data row4 col0">Golden Years Murders (stabbings)</td>
+<td id="T_7fada_row4_col1" class="data row4 col1">Unsolved - first six victims stabbed</td>
+<td id="T_7fada_row4_col2" class="data row4 col2">Richmond, VA</td>
+<td id="T_7fada_row4_col3" class="data row4 col3">Knife or cutting instrument</td>
+<td id="T_7fada_row4_col4" class="data row4 col4">1990</td>
+<td id="T_7fada_row4_col5" class="data row4 col5">20.00</td>
+<td id="T_7fada_row4_col6" class="data row4 col6">31.00</td>
+<td id="T_7fada_row4_col7" class="data row4 col7">-1.09</td>
+<td id="T_7fada_row4_col8" class="data row4 col8">No</td>
+</tr>
+<tr class="even">
+<td id="T_7fada_row5_col0" class="data row5 col0">Storyville Slayer</td>
+<td id="T_7fada_row5_col1" class="data row5 col1">Unsolved - all but one case open</td>
+<td id="T_7fada_row5_col2" class="data row5 col2">Orleans, LA</td>
+<td id="T_7fada_row5_col3" class="data row5 col3">Strangulation</td>
+<td id="T_7fada_row5_col4" class="data row5 col4">1990</td>
+<td id="T_7fada_row5_col5" class="data row5 col5">6.00</td>
+<td id="T_7fada_row5_col6" class="data row5 col6">8.00</td>
+<td id="T_7fada_row5_col7" class="data row5 col7">-0.89</td>
+<td id="T_7fada_row5_col8" class="data row5 col8">No</td>
+</tr>
+<tr class="odd">
+<td id="T_7fada_row6_col0" class="data row6 col0">Honolulu Strangler</td>
+<td id="T_7fada_row6_col1" class="data row6 col1">Unsolved - police suspected serial killer</td>
+<td id="T_7fada_row6_col2" class="data row6 col2">Honolulu, HI</td>
+<td id="T_7fada_row6_col3" class="data row6 col3">Strangulation</td>
+<td id="T_7fada_row6_col4" class="data row6 col4">1980</td>
+<td id="T_7fada_row6_col5" class="data row6 col5">7.00</td>
+<td id="T_7fada_row6_col6" class="data row6 col6">10.00</td>
+<td id="T_7fada_row6_col7" class="data row6 col7">-0.66</td>
+<td id="T_7fada_row6_col8" class="data row6 col8">No</td>
+</tr>
+<tr class="even">
+<td id="T_7fada_row7_col0" class="data row7 col0">Frankford Slasher</td>
+<td id="T_7fada_row7_col1" class="data row7 col1">Unsolved - treated as serial</td>
+<td id="T_7fada_row7_col2" class="data row7 col2">Philadelphia, PA</td>
+<td id="T_7fada_row7_col3" class="data row7 col3">Knife or cutting instrument</td>
+<td id="T_7fada_row7_col4" class="data row7 col4">1980</td>
+<td id="T_7fada_row7_col5" class="data row7 col5">39.00</td>
+<td id="T_7fada_row7_col6" class="data row7 col6">158.00</td>
+<td id="T_7fada_row7_col7" class="data row7 col7">-0.25</td>
+<td id="T_7fada_row7_col8" class="data row7 col8">No</td>
+</tr>
+<tr class="odd">
+<td id="T_7fada_row8_col0" class="data row8 col0">San Diego serial murders</td>
+<td id="T_7fada_row8_col1" class="data row8 col1">Unsolved - Metropolitan Homicide Task Force series; some later solved</td>
+<td id="T_7fada_row8_col2" class="data row8 col2">San Diego, CA</td>
+<td id="T_7fada_row8_col3" class="data row8 col3">Other or type unknown</td>
+<td id="T_7fada_row8_col4" class="data row8 col4">1980</td>
+<td id="T_7fada_row8_col5" class="data row8 col5">10.00</td>
+<td id="T_7fada_row8_col6" class="data row8 col6">18.00</td>
+<td id="T_7fada_row8_col7" class="data row8 col7">0.36</td>
+<td id="T_7fada_row8_col8" class="data row8 col8">No</td>
+</tr>
+<tr class="even">
+<td id="T_7fada_row9_col0" class="data row9 col0">Eastbound Strangler</td>
+<td id="T_7fada_row9_col1" class="data row9 col1">Unsolved - treated as serial</td>
+<td id="T_7fada_row9_col2" class="data row9 col2">Atlantic, NJ</td>
+<td id="T_7fada_row9_col3" class="data row9 col3">Strangulation</td>
+<td id="T_7fada_row9_col4" class="data row9 col4">2000</td>
+<td id="T_7fada_row9_col5" class="data row9 col5">nan</td>
+<td id="T_7fada_row9_col6" class="data row9 col6">nan</td>
+<td id="T_7fada_row9_col7" class="data row9 col7">nan</td>
+<td id="T_7fada_row9_col8" class="data row9 col8">No</td>
+</tr>
+<tr class="odd">
+<td id="T_7fada_row10_col0" class="data row10 col0">Jeff Davis 8</td>
+<td id="T_7fada_row10_col1" class="data row10 col1">Unsolved - multi-agency task force</td>
+<td id="T_7fada_row10_col2" class="data row10 col2">Jefferson Davis, LA</td>
+<td id="T_7fada_row10_col3" class="data row10 col3">Other or type unknown</td>
+<td id="T_7fada_row10_col4" class="data row10 col4">2000</td>
+<td id="T_7fada_row10_col5" class="data row10 col5">nan</td>
+<td id="T_7fada_row10_col6" class="data row10 col6">nan</td>
+<td id="T_7fada_row10_col7" class="data row10 col7">nan</td>
+<td id="T_7fada_row10_col8" class="data row10 col8">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>9 of the 11 unsolved series could be scored. The West Mesa murders got flagged. That case is still open, so the model picked out a real unsolved series without being told about it.</p>
+</section>
+<section id="how-often-the-flags-hit" class="level2">
+<h2 class="anchored" data-anchor-id="how-often-the-flags-hit">How Often the Flags Hit</h2>
+<p>To see if the hits are more than luck, I compared how often groups with a known case got flagged to how often any group gets flagged. Some killers share a group, so I counted each group once.</p>
+<div id="77997806" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>base_rate <span class="op">=</span> (fem_dec[<span class="st">"adj_z_score"</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">3</span>).mean()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(df, label):</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> df[df[<span class="st">"Scoreable"</span>] <span class="op">==</span> <span class="st">"Yes"</span>].drop_duplicates([<span class="st">"CNTYFIPS"</span>, <span class="st">"Weapon"</span>, <span class="st">"Decade"</span>])</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    rate <span class="op">=</span> (s[<span class="st">"flagged"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).mean()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(label)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Flagged, all cases:"</span>, (df[<span class="st">"flagged"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).<span class="bu">sum</span>(), <span class="st">"of"</span>, <span class="bu">len</span>(df))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Flagged, unique scoreable groups:"</span>, (s[<span class="st">"flagged"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).<span class="bu">sum</span>(), <span class="st">"of"</span>, <span class="bu">len</span>(s))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Flag rate:"</span>, <span class="bu">round</span>(rate <span class="op">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"% | baseline:"</span>, <span class="bu">round</span>(base_rate <span class="op">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"% | lift:"</span>, <span class="bu">round</span>(rate <span class="op">/</span> base_rate, <span class="dv">1</span>))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>summarize(check, <span class="st">"All confirmed killers"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>summarize(check[check[<span class="st">"Added"</span>] <span class="op">==</span> <span class="st">"Nov 2026"</span>], <span class="st">"Clean set (added without seeing scores)"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>summarize(unsolved_check, <span class="st">"Unsolved series"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>All confirmed killers
+  Flagged, all cases: 3 of 50
+  Flagged, unique scoreable groups: 3 of 31
+  Flag rate: 9.7 % | baseline: 2.5 % | lift: 3.8
+Clean set (added without seeing scores)
+  Flagged, all cases: 1 of 27
+  Flagged, unique scoreable groups: 1 of 10
+  Flag rate: 10.0 % | baseline: 2.5 % | lift: 3.9
+Unsolved series
+  Flagged, all cases: 1 of 11
+  Flagged, unique scoreable groups: 1 of 9
+  Flag rate: 11.1 % | baseline: 2.5 % | lift: 4.4</code></pre>
+</div>
+</div>
+<p>Groups with a confirmed killer got flagged 9.7% of the time, compared to 2.5% for all groups, so about 3.8 times more often. The killers I added later did about the same (1 of 10 groups). The unsolved series came in at 11.1%, about 4.4 times more often.</p>
+<div id="e063afc2" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fem_dec.to_csv(<span class="st">"../data/fem_dec.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>flagged.to_csv(<span class="st">"../data/flagged.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/esteinweiss\.github\.io\/xgboost-serial-killer-detection\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
