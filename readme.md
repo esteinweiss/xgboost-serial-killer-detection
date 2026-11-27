@@ -41,5 +41,20 @@ My case lists are small and I built them myself. The 3.8x and 4.4x come from jus
 
 The model doesn't know neighborhood, caseload, or whether witnesses talk, so a gap shows where to look, not why it's there. The same goes for the race gap: it shows a difference, not the cause. A flag means a group is worth a closer look, not that a serial killer is behind it.
 
-## Running the Notebooks
-Run the notebooks in order, 01 through 05. The raw data (`reports.csv`) is too large for GitHub, so download it from the [Murder Accountability Project](https://www.murderdata.org) and put it in the `data` folder. Each notebook saves the files the next one needs.
+## Setup
+This project uses Python and these packages:
+- pandas
+- numpy
+- scikit-learn
+- xgboost
+- shap
+- plotnine
+- matplotlib
+- plotly
+- tqdm
+
+Install them with:
+
+pip install pandas numpy scikit-learn xgboost shap plotnine matplotlib plotly tqdm
+
+The raw data (`reports.csv`) is too large for GitHub, so download it from the [Murder Accountability Project](https://www.murderdata.org) and put it in the `data` folder. Then run the notebooks in order, 01 through 05. Each notebook saves the files the next one needs.
